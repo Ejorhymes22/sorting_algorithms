@@ -11,14 +11,15 @@
 void insertion_sort_list(listint_t **list)
 {
 	listint_t *tmp, *p, *f, *l, *q;
-	int flag;
+	int flag, fg = 0;
 
 	p = *list, f = p, l = p, q = p;
 
-	while (p)
+	while (p->next)
 	{
 		f = p->next;
 		flag = 0;
+		fg++;
 		if (f && p->n > f->n)
 		{
 			tmp = p->prev;
@@ -31,10 +32,12 @@ void insertion_sort_list(listint_t **list)
 			if (f->next)
 				tmp->prev = p;
 			f->next = p;
+			if (fg == 1)
+				*list = f;
 			print_list(*list);
 			l = f->prev;
 			flag = 1;
-			while (f->n < l->n && l)
+			while (l && f->n < l->n)
 			{
 				tmp = l->prev;
 				q = l->prev;
@@ -44,7 +47,7 @@ void insertion_sort_list(listint_t **list)
 				l->prev = f;
 				l->next = f->next;
 				tmp = f->next;
-				if (f->next)	
+				if (f->next)
 					tmp->prev = l;
 				f->next = l;
 				if (f->prev == NULL)
