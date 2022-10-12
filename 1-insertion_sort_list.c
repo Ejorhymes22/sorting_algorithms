@@ -13,10 +13,11 @@ void insertion_sort_list(listint_t **list)
 	listint_t *tmp, *p, *f, *l, *q;
 	int flag, fg = 0;
 
+
+	if (!list || !*list)
+		return;
 	p = *list, f = p, l = p, q = p;
 
-	if (*list == NULL)
-		return;
 
 	while (p)
 	{
